@@ -22,6 +22,7 @@ package org.jtalks.jcommune.web.controller;
 
 import org.jtalks.jcommune.model.entity.Topic;
 import org.jtalks.jcommune.service.TopicService;
+import org.jtalks.jcommune.web.format.JodaDateFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -66,6 +70,17 @@ public final class ForumController {
     @ModelAttribute("topicsList")
     public List<Topic> populateForum() {
         return topicService.getAll();
+    }
+
+    @ModelAttribute("datesForTopics")
+    public List<Date> populateForumWithDates() throws ParseException {
+        List<Topic> topics = topicService.getAll();
+        List<Date> dates = new ArrayList<Date>(topics.size());
+        for(Topic topic:topics){
+            Date convertedDate = JodaDateFormatter.converJodaDateTimeToUtilDate(topic.getCreationDate());
+            dates.add(convertedDate);
+        }
+        return dates;
     }
 
     /**

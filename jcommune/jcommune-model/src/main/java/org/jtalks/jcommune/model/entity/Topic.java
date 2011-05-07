@@ -54,7 +54,7 @@ public class Topic extends Persistent {
     }
     
     public Topic(DateTime creationDate) {
-        this.creationDate = creationDate;
+        this.creationDate = creationDate;         
     }
     
     /**
