@@ -18,21 +18,26 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  Also add information on how to contact you by electronic and paper mail.
  */
-package org.jtalks.jcommune.web.format;
+package org.jtalks.jcommune.model.entity;
 
-import org.joda.time.DateTime;
+public class TopicBranch extends Persistent{
+  
+    private String name;
+    private String description;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class JodaDateFormatter {
-
-    public static Date converJodaDateTimeToUtilDate(DateTime jodaDateTime) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
-        String s = dateFormat.format(jodaDateTime.toDate());
-        return dateFormat.parse(s);        
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }    
 }

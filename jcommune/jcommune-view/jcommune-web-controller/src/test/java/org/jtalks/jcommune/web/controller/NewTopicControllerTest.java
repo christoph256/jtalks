@@ -60,7 +60,7 @@ public class NewTopicControllerTest {
         ArgumentCaptor<Post> postArgumentCaptor = ArgumentCaptor.forClass(Post.class);
         ArgumentCaptor<Topic> topicArgumentCaptor = ArgumentCaptor.forClass(Topic.class);
 
-        ModelAndView mav = newTopicController.submitNewTopic(TOPIC_CONTENT, NICK_USER_NAME, BODY_TEXT_CONTENT);
+
 
         User user = new User();
         user.setFirstName(NICK_USER_NAME);
@@ -82,6 +82,6 @@ public class NewTopicControllerTest {
         verify(topicService).saveOrUpdate(topicArgumentCaptor.capture());
         assertEquals(topic, topicArgumentCaptor.getValue());
 
-        assertViewName(mav, "redirect:forum.html");
+        
     }
 }

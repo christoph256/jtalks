@@ -34,5 +34,9 @@
     <bean id="topicService" class="org.jtalks.jcommune.service.transactional.TransactionalTopicService">
         <constructor-arg index="0" ref="topicDao"/>
     </bean>
-    
+
+    <bean id="topicBranchService" class="org.jtalks.jcommune.service.transactional.TransactionalTopicBranchService">
+       <constructor-arg index="0" ref="topicsBranchDao"/>
+    </bean>
+
 </beans>

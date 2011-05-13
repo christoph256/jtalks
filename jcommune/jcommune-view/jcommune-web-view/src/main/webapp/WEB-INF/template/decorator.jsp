@@ -25,7 +25,7 @@
         <tr>
             <td class="background">
                 
-                <a href="${pageContext.request.contextPath}/forum.html">&nbsp&nbsp<span class="nav">Forum</span></a> |
+                <a href="${pageContext.request.contextPath}/main.html">&nbsp&nbsp<span class="nav">Forum</span></a> |
                <span style="float: right">
                 <a href="?lang=en">En</a>
                 |

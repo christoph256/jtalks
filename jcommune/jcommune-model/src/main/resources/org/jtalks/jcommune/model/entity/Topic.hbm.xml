@@ -15,6 +15,8 @@
       foreign-key="FK_TOPIC_STARTER"/>
     <property column="TITLE" name="title" not-null="true"/>
     <property column="CREATION_DATE" name="creationDate" type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="true" />
+    <many-to-one name="branch" class="org.jtalks.jcommune.model.entity.TopicBranch" column="TOPIC_BRANCH" not-null="true"
+                 foreign-key="FK_TOPIC_BRANCH"/>
   </class>
   <query name="getTopicWithPosts">
         <![CDATA[from Topic as topic
@@ -22,4 +24,4 @@
                  WHERE topic.id = :topicId]]>
                  
   </query>
-</hibernate-mapping>
+ </hibernate-mapping>

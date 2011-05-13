@@ -6,7 +6,7 @@
   <artifactId>jcommune</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>${artifactId}</name>
+  <name>${project.artifactId}</name>
   <modules>
     <module>jcommune-model</module>
     <module>jcommune-service</module>
@@ -37,16 +37,21 @@
         <version>${hibernateVersion}</version>
       </dependency>
       <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>4.0.2.GA</version>
+      </dependency>
+      <dependency>
         <groupId>javax.transaction</groupId>
         <artifactId>jta</artifactId>
         <version>1.1</version>
-      </dependency>     
+      </dependency>
       <dependency>
         <groupId>javassist</groupId>
         <artifactId>javassist</artifactId>
         <version>3.12.1.GA</version>
       </dependency>
-     <!-- JDBC -->
+      <!-- JDBC -->
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
@@ -67,6 +72,11 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>1.6.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.5.11</version>
       </dependency>
       <!-- Spring -->
       <dependency>
@@ -148,8 +158,8 @@
         <artifactId>joda-time-hibernate</artifactId>
         <version>1.2</version>
       </dependency>
-      
-    </dependencies>      
+
+    </dependencies>
   </dependencyManagement>
 
   <build>
@@ -168,7 +178,7 @@
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-maven3-plugin</artifactId>
         <version>2.7</version>
-      </plugin>      
+      </plugin>
     </plugins>
   </build>
 

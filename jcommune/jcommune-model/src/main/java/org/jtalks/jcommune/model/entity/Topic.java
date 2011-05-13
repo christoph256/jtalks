@@ -25,6 +25,7 @@ package org.jtalks.jcommune.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.joda.time.DateTime;
 
 /**
@@ -32,12 +33,13 @@ import org.joda.time.DateTime;
  * Contains the list of related {@link Post}.
  * All Posts will be cascade deleted with the associated Topic.
  * The fields creationDate, topicStarter and Title are required and can't be <code>null</code>
+ *
  * @author Pavel Vervenko
  */
 public class Topic extends Persistent {
 
     /**
-     * The creation date of the topic. 
+     * The creation date of the topic.
      */
     private DateTime creationDate;
     /**
@@ -49,25 +51,30 @@ public class Topic extends Persistent {
      * The list of topic's posts
      */
     private List<Post> posts = new ArrayList<Post>();
-    
+
+    private TopicBranch branch;
+
     public Topic() {
     }
-    
+
     public Topic(DateTime creationDate) {
-        this.creationDate = creationDate;         
+        this.creationDate = creationDate;
     }
-    
+
     /**
      * Creates a new Topic with the creationDate initialized with current time.
-     * @return 
+     *
+     * @return
      */
     public static Topic createNewTopic() {
         return new Topic(new DateTime());
     }
+
     /**
      * Add new {@link Post} to the topic.
      * The method sets Posts.topic field to this Topic.
-     * @param newPost 
+     *
+     * @param newPost
      */
     public void addPost(Post newPost) {
         posts.add(newPost);
@@ -76,7 +83,8 @@ public class Topic extends Persistent {
 
     /**
      * Remove the post from the topic.
-     * @param postToRemove 
+     *
+     * @param postToRemove
      */
     public void removePost(Post postToRemove) {
         posts.remove(postToRemove);
@@ -84,6 +92,7 @@ public class Topic extends Persistent {
 
     /**
      * Get the post creation date.
+     *
      * @return the creationDate
      */
     public DateTime getCreationDate() {
@@ -92,6 +101,7 @@ public class Topic extends Persistent {
 
     /**
      * Set the post creation date.
+     *
      * @param creationDate the creationDate to set
      */
     public void setCreationDate(DateTime creationDate) {
@@ -100,6 +110,7 @@ public class Topic extends Persistent {
 
     /**
      * Get the user who created the post.
+     *
      * @return the userCreated
      */
     public User getTopicStarter() {
@@ -108,6 +119,7 @@ public class Topic extends Persistent {
 
     /**
      * The the author of the post.
+     *
      * @param userCreated the user who create the post
      */
     public void setTopicStarter(User userCreated) {
@@ -116,6 +128,7 @@ public class Topic extends Persistent {
 
     /**
      * Gets the topic name.
+     *
      * @return the topicName
      */
     public String getTitle() {
@@ -124,6 +137,7 @@ public class Topic extends Persistent {
 
     /**
      * Sets the topic title.
+     *
      * @param newTitle the title to set
      */
     public void setTitle(String newTitle) {
@@ -132,6 +146,7 @@ public class Topic extends Persistent {
 
     /**
      * Get the list of the posts.
+     *
      * @return the list of posts
      */
     public List<Post> getPosts() {
@@ -140,9 +155,18 @@ public class Topic extends Persistent {
 
     /**
      * Set the list of posts
+     *
      * @param posts the posts to set
      */
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
- }
+
+    public TopicBranch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(TopicBranch branch) {
+        this.branch = branch;
+    }
+}

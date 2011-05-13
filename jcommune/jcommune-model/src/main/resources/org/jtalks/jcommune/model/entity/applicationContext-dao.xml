@@ -20,7 +20,7 @@
     <bean id="userDao" class="org.jtalks.jcommune.model.dao.hibernate.UserHibernateDao" parent="abstractHibernateDao"/>
     <bean id="topicDao" class="org.jtalks.jcommune.model.dao.hibernate.TopicHibernateDao" parent="abstractHibernateDao"/>
     <bean id="postDao" class="org.jtalks.jcommune.model.dao.hibernate.PostHibernateDao" parent="abstractHibernateDao"/>
-
+    <bean id="topicsBranchDao" class="org.jtalks.jcommune.model.dao.hibernate.TopicBranchHibernateDao" parent="abstractHibernateDao"/>
     <!--Injecting sessionFactory bean to class AbstractHibernateDao, this way resolves a problem of multiple DAO beans
      definition -->
     <bean id="abstractHibernateDao" class="org.jtalks.jcommune.model.dao.hibernate.AbstractHibernateDao" abstract="true">
@@ -42,6 +42,7 @@
                 <value>/org/jtalks/jcommune/model/entity/User.hbm.xml</value>
                 <value>/org/jtalks/jcommune/model/entity/Post.hbm.xml</value>
                 <value>/org/jtalks/jcommune/model/entity/Topic.hbm.xml</value>
+                <value>/org/jtalks/jcommune/model/entity/TopicsBranch.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

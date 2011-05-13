@@ -31,12 +31,17 @@ import org.jtalks.jcommune.service.PostService;
 import org.jtalks.jcommune.service.TopicService;
 import org.jtalks.jcommune.service.UserService;
 
+import org.jtalks.jcommune.web.dto.TopicDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 
 /**
@@ -57,7 +62,7 @@ public final class NewTopicController {
      * Constructor creates MVC controller with specifying TopicService,UserService
      * objects injected via autowiring
      *
-     * @param topicService the object which provides actions on Topic entity          
+     * @param topicService the object which provides actions on Topic entity
      * @param userService  the object which provides action on User entity
      * @see User
      * @see TopicService
@@ -72,35 +77,42 @@ public final class NewTopicController {
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/newTopic", method = RequestMethod.GET)
+    public ModelAndView getNewTopicPage() {
+        return new ModelAndView("newTopic", "topicDto", new TopicDto());
+    }
+
     /**
      * This method handles POST requests, it will be always activated when the user pressing "Submit topic"
      *
-     * @param topicName input value from form which represents topic's name
-     * @param author    input value from form which represents author name
-     * @param bodyText  input value from form which represents topic's context
      * @return ModelAndView object which will be redirect to forum.html
      */
     @RequestMapping(value = "/createNewTopic", method = RequestMethod.POST)
-    public ModelAndView submitNewTopic(@RequestParam("topic") String topicName,
-                                       @RequestParam("author") String author,
-                                       @RequestParam("bodytext") String bodyText) {
-        User user = new User();
-        user.setFirstName(author);
-        user.setLastName(author);
-        user.setNickName(author);
-        userService.saveOrUpdate(user);
+    public ModelAndView submitNewTopic(@Valid @ModelAttribute TopicDto topicDto,
+                                        BindingResult result) {
 
-        Post post = Post.createNewPost();
-        post.setUserCreated(user);
-        post.setPostContent(bodyText);
+        if (result.hasErrors()) {
+            return new ModelAndView("newTopic");
+        } else {           
 
-        Topic topic = Topic.createNewTopic();
-        topic.setTitle(topicName);
-        topic.setTopicStarter(user);
-        topic.addPost(post);
+            User user = new User();
+            user.setFirstName(topicDto.getAuthor());
+            user.setLastName(topicDto.getAuthor());
+            user.setNickName(topicDto.getAuthor());
+            userService.saveOrUpdate(user);
 
-        topicService.saveOrUpdate(topic);
+            Post post = Post.createNewPost();
+            post.setUserCreated(user);
+            post.setPostContent(topicDto.getBodyText());
 
-        return new ModelAndView("redirect:forum.html");
+            Topic topic = Topic.createNewTopic();
+            topic.setTitle(topicDto.getTopicName());
+            topic.setTopicStarter(user);
+            topic.addPost(post);
+
+            topicService.saveOrUpdate(topic);
+
+            return new ModelAndView("redirect:forum.html");
+        }
     }
 }
